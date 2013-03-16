@@ -24,13 +24,15 @@ describe LTSV, 'をnewしたときにkeyとvalueを渡すと' do
 
   it '#ordered_hash でindexでsortされたkey-valueの配列を返す' do
     @ltsv.ordered_hash.should == [{
-      :foo => 'hoge',
+      :k => :foo,
+      :v => 'hoge',
     }, {
-      :bar => 'fuga',
+      :k => :bar,
+      :v => 'fuga',
     }]
   end
 
   it '#dump でkey-valueのコロンと\tで結合された文字列が格納順に取れるべき' do
-    #@ltsv.dump().should == 'foo:hoge\tbar:fuga\n'
+    @ltsv.dump().should == 'foo:hoge\tbar:fuga\n'
   end
 end

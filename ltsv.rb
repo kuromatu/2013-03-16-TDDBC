@@ -24,13 +24,20 @@ class LTSV
 
   def dump
     'foo:hoge\tbar:fuga\n'
+    ordered = ordered_hash
+    ordered.map {|elem|
+      "#{elem[:k]}:#{elem[:v]}"
+    }.join('\t') + '\n'
   end
 
   def ordered_hash
     @hash.to_a.sort{|a, b|
         a[1][:index] <=> b[1][:index] 
     }.map{|i|
-      {i[0] => i[1][:value]}
+      {
+        :k => i[0],
+        :v => i[1][:value],
+      }
     }
   end
 end
