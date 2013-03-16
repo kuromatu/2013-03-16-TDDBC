@@ -45,4 +45,9 @@ describe LTSV, 'をnewしたときにkeyとvalueを渡すと' do
     @ltsv.set('foo', 'piyo').should == 'hoge'
     @ltsv.get(:foo).should == 'piyo'
   end
+
+  it '#set 新たにsetしたときに新たにindexをふる' do
+    @ltsv.set('foo', 'piyo')
+    @ltsv.dump.should == 'bar:fuga\tfoo:piyo\n'
+  end
 end
