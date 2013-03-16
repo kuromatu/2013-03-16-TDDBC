@@ -15,7 +15,7 @@ class LTSV
   end
 
   def get(key)
-    @hash[key][:value]
+    @hash[key][:value] if @hash[key]
   end
 
   def get_index(key)
@@ -41,6 +41,9 @@ class LTSV
   end
 
   def set(key, value)
+    raise 'nilはdamedayo' if key == nil || key == ''
+    raise 'nilはdamedayo' if value == nil || value == ''
+
     original_value = nil
     if @hash[key.to_sym]
       original_value = get(key.to_sym)

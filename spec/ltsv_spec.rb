@@ -57,7 +57,27 @@ describe LTSV, 'をnewしたときに何もない状況だと' do
     @ltsv = LTSV.new
   end
 
-  it '#initialize で空の@hashができる' do
+  it '#initialize で空の@hashができるべき' do
     @ltsv.instance_variable_get(:@hash).should == {}
+  end
+
+  it '#get 存在しないkeyはnilを返すべき' do
+    @ltsv.get(:toto).should == nil
+  end
+
+  it '#set keyがnilの場合は例外' do
+    expect { @ltsv.set(nil, 'momo') }.to raise_error
+  end
+
+  it '#set keyが空文字の場合は例外' do
+    expect { @ltsv.set('', 'gogo') }.to raise_error
+  end
+
+  it '#set valueがnilの場合は例外' do
+    expect { @ltsv.set('key', nil) }.to raise_error
+  end
+
+  it '#set valueが空文字の場合は例外' do
+    expect { @ltsv.set('key', '') }.to raise_error
   end
 end
