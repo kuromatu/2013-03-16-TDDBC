@@ -51,3 +51,13 @@ describe LTSV, 'をnewしたときにkeyとvalueを渡すと' do
     @ltsv.dump.should == 'bar:fuga\tfoo:piyo\n'
   end
 end
+
+describe LTSV, 'をnewしたときに何もない状況だと' do
+  before do
+    @ltsv = LTSV.new
+  end
+
+  it '#initialize で空の@hashができる' do
+    @ltsv.instance_variable_get(:@hash).should == {}
+  end
+end

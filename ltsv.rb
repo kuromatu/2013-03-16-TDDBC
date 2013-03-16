@@ -1,5 +1,5 @@
 class LTSV
-  def initialize(hash)
+  def initialize(hash = {})
     @max_index = 0
     @hash = hash.map{|k, v|
       h = {
