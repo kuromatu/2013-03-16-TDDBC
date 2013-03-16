@@ -35,4 +35,14 @@ describe LTSV, 'をnewしたときにkeyとvalueを渡すと' do
   it '#dump でkey-valueのコロンと\tで結合された文字列が格納順に取れるべき' do
     @ltsv.dump().should == 'foo:hoge\tbar:fuga\n'
   end
+
+  it '#set で存在しないkeyとvalueを渡すとnilが取れて値が設定されるべき' do
+    @ltsv.set('buzz', 'piyo').should == nil
+    @ltsv.get(:buzz).should == 'piyo'
+  end
+
+  it '#set で存在するkeyとvalueを渡すと元のvalueが取れて値が設定されるべき' do
+    @ltsv.set('foo', 'piyo').should == 'hoge'
+    @ltsv.get(:foo).should == 'piyo'
+  end
 end

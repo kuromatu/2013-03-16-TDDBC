@@ -23,7 +23,6 @@ class LTSV
   end
 
   def dump
-    'foo:hoge\tbar:fuga\n'
     ordered = ordered_hash
     ordered.map {|elem|
       "#{elem[:k]}:#{elem[:v]}"
@@ -39,5 +38,22 @@ class LTSV
         :v => i[1][:value],
       }
     }
+  end
+
+  def set(key, value)
+    original_value = nil
+    if @hash[key.to_sym]
+      original_value = get(key.to_sym)
+    end
+
+    hash = {
+      key.to_sym => {
+        :value => value,
+        :index => @max_index,
+      }
+    }
+    @max_index += 1
+    @hash.merge!(hash)
+    original_value
   end
 end
