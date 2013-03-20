@@ -15,7 +15,7 @@ class LTSV
   end
 
   def get(key)
-    @hash[key][:value] if @hash[key]
+    escape(@hash[key][:value]) if @hash[key]
   end
 
   def get_index(key)
@@ -25,7 +25,7 @@ class LTSV
   def dump
     ordered = ordered_hash
     ordered.map {|elem|
-      "#{elem[:k]}:#{elem[:v]}"
+      "#{elem[:k]}:#{get(elem[:k])}"
     }.join('\t') + '\n'
   end
 
@@ -58,5 +58,9 @@ class LTSV
     @max_index += 1
     @hash.merge!(hash)
     original_value
+  end
+
+  def escape(str)
+    str.gsub(/:/, '\:')
   end
 end

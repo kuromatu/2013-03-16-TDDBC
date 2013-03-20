@@ -80,4 +80,10 @@ describe LTSV, 'をnewしたときに何もない状況だと' do
   it '#set valueが空文字の場合は例外' do
     expect { @ltsv.set('key', '') }.to raise_error
   end
+
+  it '#escape valueにコロンがあったときはエスケープする' do
+    @ltsv.set('key', ':')
+    @ltsv.get(:key).should == '\:'
+    @ltsv.dump().should == 'key:\:\n'
+  end
 end
